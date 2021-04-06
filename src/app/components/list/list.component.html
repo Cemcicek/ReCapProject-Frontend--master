@@ -1,0 +1,47 @@
+<h4>Marka ve Renk Güncelleme</h4>
+
+<div *ngIf="dataLoaded == false" class="text-center">
+    <div class="spinner-border text-dark" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  
+ <br>
+  <ul *ngIf="dataLoaded == true" class="list-group">
+    <li
+      routerLink="/brand/update"
+      [ngClass]="getAllBrandClass()"
+      (click)="removeCurrentBrand()"
+      aria-current="true"
+    >
+      Tüm markalar
+    </li>
+  
+    <li
+      routerLink="/brand/update/{{ brand.brandId }}"
+      (click)="setCurrentBrand(brand)"
+      *ngFor="let brand of brands | filterBrand:filterText"
+      [ngClass]="getCurrentBrandClass(brand)"
+    
+      >
+      {{ brand.brandName }}
+    </li>
+</ul>
+<br>
+<hr><hr>
+
+
+
+<ul *ngIf="dataLoaded == true" class="list-group">
+    <li 
+    routerLink="/color/update"
+    (click)="removeCurrentColor()"
+    [ngClass]="getAllCurrentColorClass()" aria-current="true">Renkler</li>
+    <li
+    (click)="setCurrentColor(color)"
+    [ngClass]="getCurrentColorClass(color)"
+    routerLink="/color/update{{color.colorId}}"
+    *ngFor="let color of colors | filterColor:filterText">
+    {{color.colorName}}</li>
+ 
+  </ul>
